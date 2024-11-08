@@ -1,0 +1,27 @@
+services:
+  mongobackup:
+    image: mongo:5
+    volumes:
+      - ${MONGODB_BACKUP_PATH}:/backup
+    environment:
+      MONGODB_BACKUP_URL: ${MONGODB_BACKUP_URL}
+    command: >
+      sh -c "mongodump --uri=\"$$MONGODB_BACKUP_URL\" --out=\"/backup/$$(date +%Y-%m-%d_%H-%M-%S)\""
+
+  pgbackup:
+    image: postgres:15.2
+    volumes:
+      - ${POSTGRES_BACKUP_PATH}:/backup
+    environment:
+      POSTGRES_HOST: ${POSTGRES_BACKUP_HOST}
+      POSTGRES_PORT: ${POSTGRES_BACKUP_PORT}
+      POSTGRES_USER: ${POSTGRES_BACKUP_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_BACKUP_PASSWORD}
+      POSTGRES_BACKUP_DB_1: ${POSTGRES_BACKUP_DB_1}
+      POSTGRES_BACKUP_DB_2: ${POSTGRES_BACKUP_DB_2}
+      POSTGRES_BACKUP_DB_3: ${POSTGRES_BACKUP_DB_3}
+    entrypoint: >
+      sh -c "export PGPASSWORD=${POSTGRES_BACKUP_PASSWORD} &&
+            pg_dump -U \"$$POSTGRES_USER\" -h \"$$POSTGRES_HOST\" -p \"$$POSTGRES_PORT\" -d $${POSTGRES_BACKUP_DB_1} > \"/backup/backup_$$(date +%Y-%m-%d_%H-%M-%S)_$${POSTGRES_BACKUP_DB_1}.sql\" &&
+            pg_dump -U \"$$POSTGRES_USER\" -h \"$$POSTGRES_HOST\" -p \"$$POSTGRES_PORT\" -d $${POSTGRES_BACKUP_DB_2} > \"/backup/backup_$$(date +%Y-%m-%d_%H-%M-%S)_$${POSTGRES_BACKUP_DB_2}.sql\" &&
+            pg_dump -U \"$$POSTGRES_USER\" -h \"$$POSTGRES_HOST\" -p \"$$POSTGRES_PORT\" -d $${POSTGRES_BACKUP_DB_3} > \"/backup/backup_$$(date +%Y-%m-%d_%H-%M-%S)_$${POSTGRES_BACKUP_DB_3}.sql\""
