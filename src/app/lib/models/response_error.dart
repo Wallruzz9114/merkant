@@ -17,22 +17,22 @@ class ResponseError {
         message = json['message'];
 }
 
-class ResponseFailModel {
+class ResponseFailure {
   int? statusCode;
   bool isValid;
   bool hasError;
   List<ResponseError> errors;
 
-  ResponseFailModel({
+  ResponseFailure({
     this.statusCode,
     required this.isValid,
     required this.hasError,
     required this.errors,
   });
 
-  factory ResponseFailModel.fromJson(
+  factory ResponseFailure.fromJson(
           Map<String, dynamic>? json, int? statusCode) =>
-      ResponseFailModel(
+      ResponseFailure(
         statusCode: statusCode,
         isValid: json != null ? json['isValid'] : false,
         hasError: json != null ? json['hasError'] : false,

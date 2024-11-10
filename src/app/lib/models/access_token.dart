@@ -1,5 +1,5 @@
-class AccessTokenModel {
-  AccessTokenModel({
+class AccessToken {
+  AccessToken({
     required this.accessToken,
     required this.expiresIn,
     required this.tokenType,
@@ -12,7 +12,7 @@ class AccessTokenModel {
   late final String refreshToken;
   late final int issuedUtc;
 
-  AccessTokenModel.fromJson(Map<String, dynamic> json) {
+  AccessToken.fromJson(Map<String, dynamic> json) {
     accessToken = json['accessToken'];
     expiresIn = json['expiresIn'];
     tokenType = json['tokenType'];
