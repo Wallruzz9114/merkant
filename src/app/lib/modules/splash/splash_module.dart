@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 // import 'package:flutter_modular/flutter_modular.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -17,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Future<dynamic>.delayed(const Duration(seconds: 1))
         .then((dynamic value) async {
-      // Modular.to.pushReplacementNamed('/tab/');
+      Modular.to.pushReplacementNamed('/root/');
     });
   }
 

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:merkant/home/merkant.dart';
+import 'package:merkant/root/merkant.dart';
 
 class ErrorInterceptor extends InterceptorsWrapper {
   @override

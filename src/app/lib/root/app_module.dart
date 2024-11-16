@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:merkant/modules/navigation/root_module.dart';
 import 'package:merkant/modules/splash/splash_screen.dart';
 import 'package:merkant/shared/utils/http/dio_api.dart';
 import 'package:merkant/shared/utils/utils.dart';
@@ -26,9 +27,7 @@ class AppModule extends Module {
 
   @override
   final List<ModularRoute> routes = <ModularRoute>[
-    ModuleRoute<SplashModule>(
-      Modular.initialRoute,
-      module: SplashModule(),
-    ),
+    ModuleRoute<SplashModule>(Modular.initialRoute, module: SplashModule()),
+    ModuleRoute<RootModule>(RootModule.routeName, module: RootModule())
   ];
 }
